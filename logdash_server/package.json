@@ -4,11 +4,20 @@
   "description": "LogDash maintains and serves action logs for REST API calls of your microservices",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Asad Ullah Aziz",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.0",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.1.6"
   }
 }
