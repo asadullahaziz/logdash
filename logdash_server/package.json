@@ -1,0 +1,14 @@
+{
+  "name": "logdash_server",
+  "version": "1.0.0",
+  "description": "LogDash maintains and serves action logs for REST API calls of your microservices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asad Ullah Aziz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
