@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  logdash_server:
+    build: logdash_server/
+    container_name: logdash_server
+    command: sh ./docker-entrypoint.sh
+    ports:
+      - $LOGDASH_SERVER_PORT:$LOGDASH_SERVER_PORT
+    environment:
+      - PORT=$LOGDASH_SERVER_PORT
+      - SERVICE_NAME=logdash_server
