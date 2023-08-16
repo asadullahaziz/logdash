@@ -1,5 +1,5 @@
 // Libs
-import "dotenv/config";
+// import "dotenv/config";
 import express, { Express, Request, Response } from "express";
 
 // Modules
