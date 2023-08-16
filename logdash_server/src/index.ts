@@ -3,7 +3,7 @@ import "dotenv/config";
 import express, { Express, Request, Response } from "express";
 
 // Modules
-// import userRoutes from "./routes/users";
+import routes from "./routes";
 // import errorHandler from "./utils/errorHandler"
 
 // Setup
@@ -14,10 +14,7 @@ const port = process.env.PORT || 3000;
 // app.use(express.json());
 
 // Routes
-// app.use(userRoutes);
-app.get("/", (req: Request, res: Response) => {
-    res.send({message: "OK"});
-});
+app.use(routes);
 
 // Error Handler
 // app.use(errorHandler);
