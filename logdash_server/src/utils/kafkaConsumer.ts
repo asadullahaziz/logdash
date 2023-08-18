@@ -33,6 +33,7 @@ export default class KafkaConsumer {
                     const { topic, partition, message } = messagePayload
                     const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
                     console.log(`- ${prefix} ${message.key}#${message.value}`)
+                    await this.messageProcessor(message);
                 }
             })
         } catch (error) {
