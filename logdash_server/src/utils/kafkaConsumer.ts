@@ -1,5 +1,5 @@
 import { Consumer, ConsumerSubscribeTopics, EachBatchPayload, Kafka, EachMessagePayload } from 'kafkajs'
-import { MessageProcessor } from '../types';
+import { MessageProcessor } from '../types/index.js';
 
 export default class KafkaConsumer {
     private kafkaConsumer: Consumer;

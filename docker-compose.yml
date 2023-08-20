@@ -1,19 +1,12 @@
 version: "3.8"
 
 services:
-  logdash_server:
-    build: logdash_server/
-    container_name: logdash_server
-    command: sh ./docker-entrypoint.sh
+  redis:
+    image: 'bitnami/redis:latest'
     ports:
-      - $LOGDASH_SERVER_PORT:$LOGDASH_SERVER_PORT
+      - $REDIS_PORT:$REDIS_PORT
     environment:
-      - PORT=$LOGDASH_SERVER_PORT
-      - SERVICE_NAME=logdash_server
-      - KAFKA_HOST=$KAFKA_HOST
-      - LOGDASH_KAFKA_CLIENT_ID=$LOGDASH_KAFKA_CLIENT_ID
-      - LOGDASH_KAFKA_GROUP_ID=$LOGDASH_KAFKA_GROUP_ID
-      - KAFKA_LOGDASH_TOPIC=$KAFKA_LOGDASH_TOPIC
+      - REDIS_PASSWORD=$REDIS_PASSWORD
   
   zookeeper:
     image: 'bitnami/zookeeper:latest'
@@ -39,3 +32,22 @@ services:
       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+  
+  logdash_server:
+    build: logdash_server/
+    container_name: logdash_server
+    command: sh ./docker-entrypoint.sh
+    ports:
+      - $LOGDASH_SERVER_PORT:$LOGDASH_SERVER_PORT
+    environment:
+      - PORT=$LOGDASH_SERVER_PORT
+      - SERVICE_NAME=logdash_server
+      - KAFKA_HOST=$KAFKA_HOST
+      - LOGDASH_KAFKA_CLIENT_ID=$LOGDASH_KAFKA_CLIENT_ID
+      - LOGDASH_KAFKA_GROUP_ID=$LOGDASH_KAFKA_GROUP_ID
+      - KAFKA_LOGDASH_TOPIC=$KAFKA_LOGDASH_TOPIC
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+    depends_on:
+      - kafka
+      - redis

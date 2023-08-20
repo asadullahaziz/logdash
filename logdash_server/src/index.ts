@@ -3,7 +3,7 @@
 import express, { Express, Request, Response } from "express";
 
 // Modules
-import routes from "./routes";
+import routes from "./routes/index.js";
 // import errorHandler from "./utils/errorHandler"
 
 // Setup

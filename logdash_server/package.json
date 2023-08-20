@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "LogDash maintains and serves action logs for REST API calls of your microservices",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
