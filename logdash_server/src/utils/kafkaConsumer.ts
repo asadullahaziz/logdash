@@ -11,11 +11,11 @@ export default class KafkaConsumer {
 
     public constructor(messageProcessor: MessageProcessor, host: string, clientId: string, groupId: string, topics: Array<string>) {
         this.messageProcessor = messageProcessor;
-        this.kafkaConsumer = this.createKafkaConsumer();
         this.host = host;
         this.clientId = clientId;
         this.groupId = groupId;
         this.topics = topics;
+        this.kafkaConsumer = this.createKafkaConsumer();
     }
 
     public async startConsumer(): Promise<void> {
