@@ -1,12 +1,12 @@
 import { createClient } from "redis";
 
 const redisOptions = {
-    host: "redis",
-    port: process.env.REDIS_PORT,
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT as string),
     password: process.env.REDIS_PASSWORD
 }
 
-const redisClient = createClient(redisOptions);
+const redisClient = createClient({ url: `redis://:${redisOptions.password}@${redisOptions.host}:${redisOptions.port}` });
 
 redisClient.on("connect", () => {
     console.log("Redis Connected");
