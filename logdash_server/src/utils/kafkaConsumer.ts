@@ -1,4 +1,4 @@
-import { Consumer, ConsumerSubscribeTopics, EachBatchPayload, Kafka, EachMessagePayload } from 'kafkajs'
+import { Consumer, ConsumerSubscribeTopics, EachBatchPayload, Kafka, EachMessagePayload, KafkaConfig } from 'kafkajs'
 import { MessageProcessor } from '../types/index.js';
 
 export default class KafkaConsumer {
@@ -69,10 +69,20 @@ export default class KafkaConsumer {
     }
 
     private createKafkaConsumer(): Consumer {
-        const kafka = new Kafka({
+        let kafkaConfig: KafkaConfig = {
             clientId: this.clientId,
             brokers: [this.host]
-        });
+        };
+
+        if (process.env.KAFKA_USER_NAME && process.env.KAFKA_PASSWORD) {
+            kafkaConfig.sasl = {
+                mechanism: 'plain',
+                username: process.env.KAFKA_USER_NAME,
+                password: process.env.KAFKA_PASSWORD
+            };
+        }
+
+        const kafka = new Kafka(kafkaConfig);
         const consumer = kafka.consumer({ groupId: this.groupId });
         return consumer;
     }
