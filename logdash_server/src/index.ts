@@ -1,7 +1,7 @@
 // Libs
 // import "dotenv/config";
 import express, { Express, Request, Response } from "express";
-import startKafkaConsumer from "./utils/connectConsumer.js";
+import kafkaConsumer from "./utils/connectConsumer.js";
 
 
 // Modules
@@ -21,6 +21,8 @@ app.use(routes);
 // Error Handler
 // app.use(errorHandler);
 
+// Start consumer
+kafkaConsumer.startConsumer();
 
 // Init Server
 app.listen(port, () => {
