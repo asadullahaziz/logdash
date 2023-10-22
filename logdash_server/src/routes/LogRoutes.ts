@@ -6,7 +6,13 @@ import { EVENTS } from "../constants.js";
 
 // Get all API action logs from cache
 router.get("/", async (req: Request, res: Response) => {
-    const logs: Array<string> | null = await redisClient.get("api_action_log:*") as any;
+    const logs: Array<string> = [];
+
+    for await (const key of redisClient.scanIterator({ MATCH: "api_action_log:*" })) {
+        const value = await redisClient.get(key) as string;
+        logs.push(value);
+    }
+
     res.send(logs);
 });
 
